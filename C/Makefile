@@ -11,7 +11,6 @@ all: $(NAME)
 $(NAME):
 
 clean:
-	rm -f $(NAME)
 
 fclean:
 	rm -f $(NAME)
