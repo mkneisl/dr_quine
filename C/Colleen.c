@@ -1,95 +1,26 @@
 #include <unistd.h>
-#include <stdio.h>
-#define NL "\n"
+
+#define CODE(x) "#include <unistd.h>\n\n#define CODE(x) " x "\n#define STR(x) #x\n#define EXPAND(x) STR(x)\n\n/*\n This program will print its own source when run.\n*/\n\nvoid ft_putstr_fd(int fd, const char* str)\n{\n    int strLen;\n\n    for (strLen = 0; str[strLen]; strLen++);\n    write(fd, str, strLen);\n}\n\nint main()\n{\n    /*\n     Basic libft function\n    */\n    ft_putstr_fd(1, CODE(EXPAND(CODE(x))));\n    return  0;\n}\n"
+#define STR(x) #x
+#define EXPAND(x) STR(x)
 
 /*
  This program will print its own source when run.
 */
 
-void doStuff();
+void ft_putstr_fd(int fd, const char* str)
+{
+    int strLen;
 
-char* str = "#include <unistd.h>" NL
-"#include <stdio.h>" NL
-"#define NL \"\\n\"" NL
-"" NL
-"/*" NL
-" This program will print its own source when run." NL
-"*/" NL
-"" NL
-"void doStuff();" NL
-"" NL
-"char* str = \"%s\"" NL
-"" NL
-"int main()" NL
-"{" NL
-"    doStuff();" NL
-"    /*" NL
-"        Print the programm" NL
-"    */" NL
-"    printf(str, str);" NL
-"    return  0;" NL
-"}" NL
-"" NL
-"void doStuff()" NL
-"{" NL
-"    int i = 0;" NL
-"" NL
-"    i += 2;" NL
-"    if (i < 1)" NL
-"        return;" NL
-"    return;" NL
-"}" NL;
-
-
-// char* str = R"(
-// #include <unistd.h>
-// #include <stdio.h>
-
-// /*
-//  This program will print its own source when run.
-// */
-
-// void doStuff();
-
-// char* str = R"%s(%s)%s";
-
-// int main()
-// {
-//     doStuff();
-//     /*
-//         Print the programm
-//     */
-//     printf(str, "", str, "", '\n');
-//     return  0;
-// }
-
-// void doStuff()
-// {
-//     int i = 0;
-
-//     i += 2;
-//     if (i < 1)
-//         return;
-//     return;
-// }
-// )";
+    for (strLen = 0; str[strLen]; strLen++);
+    write(fd, str, strLen);
+}
 
 int main()
 {
-    doStuff();
     /*
-        Print the programm
+     Basic libft function
     */
-    printf(str, str);
+    ft_putstr_fd(1, CODE(EXPAND(CODE(x))));
     return  0;
-}
-
-void doStuff()
-{
-    int i = 0;
-
-    i += 2;
-    if (i < 1)
-        return;
-    return;
 }
