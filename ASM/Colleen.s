@@ -14,7 +14,7 @@ section .text
 ft_putstr_fd:
     xor rdx, rdx
     mov rax, 1
- .loop:
+.loop:
     cmp BYTE[rdi + rdx], 0
     inc rdx
     jnz .loop

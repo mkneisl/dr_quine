@@ -1,4 +1,4 @@
-NAME = Colleen Grace
+NAME = Sully Colleen Grace
 
 OS_NAME = $(shell uname -s)
 
@@ -15,14 +15,13 @@ else
 endif
 	ld -e main -o $@ $@.o
 	rm -f $@.o
+
 $(NAME):
 
-test:
-
-
 clean:
+	rm -f $(addsuffix _*, $(NAME))
 
-fclean:
+fclean: clean
 	rm -f $(NAME)
 
 re: fclean $(NAME)
