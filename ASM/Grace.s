@@ -9,8 +9,12 @@
 main:
     mov rdi, fileName
     mov rsi, 577
-    mov rdx, 0666
+    mov rdx, 0o666
+%ifidn __OUTPUT_FORMAT__, macho64
+    mov rax, 0x2000005
+%elifidn __OUTPUT_FORMAT__, elf64
     mov rax, 2
+%endif
     syscall
     cmp rax, 0
     jns .write_file
@@ -22,16 +26,28 @@ main:
     mov rdi, rax
     mov rsi, dataCode
     mov rdx, dataLen
+%ifidn __OUTPUT_FORMAT__, macho64
+    mov rax, 0x2000004
+%elifidn __OUTPUT_FORMAT__, elf64
     mov rax, 1
+%endif
     syscall
     add rsp, 8
     pop rdi
+%ifidn __OUTPUT_FORMAT__, macho64
+    mov rax, 0x2000006
+%elifidn __OUTPUT_FORMAT__, elf64
     mov rax, 3
+%endif
     syscall
 .exit:
     xor rdi, rdi
 .error_exit:
-    mov rax, 60
+%ifidn __OUTPUT_FORMAT__, macho64
+    mov rax, 0x2000001
+%elifidn __OUTPUT_FORMAT__, elf64
+    mov rax, 1
+%endif
     syscall
     int 3
 %endmacro

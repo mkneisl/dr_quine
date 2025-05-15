@@ -39,7 +39,7 @@ Sully_diff: Sully
 	@-diff Sully_idiff Sully_compare > Sully_diff
 
 test: $(addsuffix _diff, $(NAME))
-	echo "[*] Checking output..."
+	@echo "[*] Checking output..."
 	$(call check_diff,Colleen)
 	$(call check_diff,Grace)
 	$(call check_diff,Sully)

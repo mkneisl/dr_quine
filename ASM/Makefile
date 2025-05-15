@@ -6,14 +6,15 @@ all: $(NAME)
 
 %: %.s
 ifeq ($(OS_NAME), Darwin)
-	nasm -f macho64 $< -o $@
+	nasm -f macho64 $< -o $@.o
+	ld -static -e main -o $@ $@.o
 else ifeq ($(OS_NAME), Linux)
 	nasm -f elf64 $< -o $@.o
+	ld -e main -o $@ $@.o
 else
 	@echo "[ERROR]: Unsupported OS!"
 	@exit 1
 endif
-	ld -e main -o $@ $@.o
 	rm -f $@.o
 
 $(NAME):
