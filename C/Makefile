@@ -44,7 +44,6 @@ test: $(addsuffix _diff, $(NAME))
 	$(call check_diff,Grace)
 	$(call check_diff,Sully)
 
-
 clean:
 	rm -f $(addsuffix _*, $(NAME))
 
